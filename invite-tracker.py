@@ -13,10 +13,16 @@ class InviteTracker(commands.Cog):
         # Überprüfen, wer die Einladung gemacht hat
         for invite in invites:
             if invite.uses > invite.max_uses:
-                print(f"{member.name} wurde von {invite.inviter} eingeladen.")
+                message = f"{member.name} wurde von {invite.inviter} eingeladen."
                 break
         else:
-            print(f"{member.name} wurde nicht von jemandem eingeladen.")
+            message = f"{member.name} wurde nicht von jemandem eingeladen."
+
+        # Nachricht im Channel senden
+        # Hier geben wir den Channel an, in dem die Nachricht gesendet werden soll
+        channel = discord.utils.get(member.guild.text_channels, name='allgemein')  # Oder den gewünschten Channel
+        if channel:
+            await channel.send(message)
 
     # Leaderboard für Einladungen
     @commands.command()
@@ -32,4 +38,4 @@ class InviteTracker(commands.Cog):
 
 # Cog laden
 async def setup(bot):
-  await bot.add_cog(InviteTracker(bot))  # Mit await
+    await bot.add_cog(InviteTracker(bot))  # Mit await
