@@ -29,19 +29,21 @@ class VerificationCog(commands.Cog):
         self.bot.add_view(VerificationView())
 
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def verify(self, ctx):
         """Sende die Verifizierungs-Nachricht."""
-        # Prüfe ob der Benutzer Administrator-Rechte hat
-        if not ctx.author.guild_permissions.administrator:
-            await ctx.send("❌ Du hast keine Berechtigung, diesen Befehl zu verwenden!", ephemeral=True)
-            return
+        try:
 
         embed = discord.Embed(
             title="🎉 Willkommen!",
             description="Bitte klicke auf den Button unten, um dich zu verifizieren!",
             color=discord.Color.green()
         )
-        await ctx.send(embed=embed, view=VerificationView())
+            await ctx.send(embed=embed, view=VerificationView())
+        except discord.Forbidden:
+            await ctx.send("❌ Ich habe keine ausreichenden Berechtigungen!", ephemeral=True)
+        except Exception as e:
+            await ctx.send(f"❌ Ein Fehler ist aufgetreten: {str(e)}", ephemeral=True)
 
 async def setup(bot):
     await bot.add_cog(VerificationCog(bot))
