@@ -26,10 +26,10 @@ def load_xp_data():
 class LevelingCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.bot.add_view(VerificationView())  # Falls ein View hinzugefügt werden muss
         load_xp_data()  # XP-Daten laden
 
     @commands.command()
+    @commands.has_permissions(administrator=True)  # Nur Admins können diesen Befehl ausführen
     async def levelsetup(self, ctx, channel: discord.TextChannel):
         """Admin-Befehl, um den Level-Up-Kanal festzulegen."""
         global level_up_channel_id
