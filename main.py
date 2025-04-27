@@ -15,8 +15,13 @@ bot = commands.Bot(command_prefix="!", intents=intents, application_id="13552622
 async def on_ready():
     print(f"✅ Bot ist online! Eingeloggt als {bot.user}")
 
-    # Slash-Commands in allen Servern registrieren
-    await bot.tree.sync()
+    # Slash-Commands in allen Servern registrieren (synchronisieren)
+    try:
+        print("Synchronisiere Slash-Commands...")
+        await bot.tree.sync()  # Sync von Slash-Commands mit Discord
+        print("Slash-Commands erfolgreich synchronisiert!")
+    except Exception as e:
+        print(f"Fehler beim Synchronisieren der Slash-Commands: {e}")
 
 # Prefixed Command (z.B. !ping)
 @bot.command()
