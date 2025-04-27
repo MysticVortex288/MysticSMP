@@ -29,10 +29,13 @@ async def slash_ping(interaction: discord.Interaction):
     await interaction.response.send_message("🏓 Pong!")
 
 # Weitere Beispiele für Prefixed- und Slash-Commands:
+
+# Prefixed Command (z.B. !hello)
 @bot.command()
 async def hello(ctx):
     await ctx.send(f"Hallo {ctx.author.mention}! Ich bin ein Bot!")
 
+# Slash-Command (z.B. /hello)
 @bot.tree.command(name="hello", description="Begrüßt den Benutzer!")
 async def slash_hello(interaction: discord.Interaction):
     await interaction.response.send_message(f"Hallo {interaction.user.mention}! Ich bin ein Bot!")
