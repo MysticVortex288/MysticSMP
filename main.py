@@ -7,11 +7,14 @@ intents = discord.Intents.default()
 intents.members = True
 intents.invites = True
 bot = commands.Bot(command_prefix="!", intents=intents)
-bot.load_extension("invite_tracker")  # Wenn der Cog "invite_tracker.py" heißt
+
 
 
 # Bot erstellen mit dem Prefix "!" (nur Prefixed-Commands)
 bot = commands.Bot(command_prefix="!", intents=intents)
+# Cog laden
+async def load_cogs():
+    await bot.load_extension("invite-tracker")  # Ohne .py am Ende!
 
 # Event: Wenn der Bot bereit ist
 @bot.event
