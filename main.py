@@ -4,7 +4,11 @@ import os
 
 # Intents einstellen (benötigt, um Nachrichteninhalte zu lesen)
 intents = discord.Intents.default()
-intents.message_content = True
+intents.members = True
+intents.invites = True
+bot = commands.Bot(command_prefix="!", intents=intents)
+bot.load_extension("invite_tracker")  # Wenn der Cog "invite_tracker.py" heißt
+
 
 # Bot erstellen mit dem Prefix "!" (nur Prefixed-Commands)
 bot = commands.Bot(command_prefix="!", intents=intents)
