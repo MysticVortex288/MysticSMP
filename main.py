@@ -12,9 +12,12 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Event: Wenn der Bot bereit ist
 @bot.event
+async def on_ready():
     print(f"✅ Bot ist online! Eingeloggt als {bot.user}")
-
+    
     # Cog laden
+    await load_extensions()
+
 async def load_extensions():
     await bot.load_extension("invite-tracker")
     await bot.load_extension("level")
