@@ -14,10 +14,10 @@ class VerificationCog(commands.Cog):
                 description="Bitte klicke auf den Knopf, um zu verifizieren.",
                 color=discord.Color.blue()
             )
-            
+
             view = discord.ui.View()
             view.add_item(discord.ui.Button(label="Verify", style=discord.ButtonStyle.green, custom_id="verify"))
-            
+
             # Sende die Nachricht an den Benutzer
             await member.send(embed=embed, view=view)
 
