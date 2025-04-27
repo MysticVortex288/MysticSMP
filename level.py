@@ -54,33 +54,32 @@ class LevelingCog(commands.Cog):
 
     async def check_level_up(self, member):
         user_xp = xp_data.get(str(member.id), 0)
-        user_level = user_xp // xp_to_level_up
+        new_level = user_xp // xp_to_level_up
 
-        # Abhängig vom Level eine Rolle vergeben
+        # Abhängig vom Level eine Rolle vergeben und nur eine Nachricht senden, wenn das Level erreicht wurde
         roles = member.roles
-        if user_level >= 5 and "Level 5" not in [role.name for role in roles]:
+        role_name = f"Level {new_level + 1}"  # Level beginnt bei 1
+
+        # Check if the member hasn't already reached the next level
+        if new_level >= 5 and "Level 5" not in [role.name for role in roles]:
             role = discord.utils.get(member.guild.roles, name="Level 5")
             if role:
                 await member.add_roles(role)
                 await member.send("🎉 Du hast Level 5 erreicht und eine neue Rolle erhalten!")
 
-        if user_level >= 10 and "Level 10" not in [role.name for role in roles]:
+        if new_level >= 10 and "Level 10" not in [role.name for role in roles]:
             role = discord.utils.get(member.guild.roles, name="Level 10")
             if role:
                 await member.add_roles(role)
                 await member.send("🎉 Du hast Level 10 erreicht und eine neue Rolle erhalten!")
 
-        if user_level >= 15 and "Level 15" not in [role.name for role in roles]:
-            role = discord.utils.get(member.guild.roles, name="Level 15")
-            if role:
-                await member.add_roles(role)
-                await member.send("🎉 Du hast Level 15 erreicht und eine neue Rolle erhalten!")
-
-        # Level-Up-Nachricht senden, wenn ein Kanal festgelegt wurde
+        # Check and notify only if the user has leveled up
         if level_up_channel_id:
             channel = self.bot.get_channel(level_up_channel_id)
             if channel:
-                await channel.send(f"🎉 {member.mention} hat Level {user_level} erreicht! Glückwunsch!")
+                # Send a level up message only if the user has leveled up
+                if user_xp // xp_to_level_up > (user_xp - xp_per_message) // xp_to_level_up:  # Check if level increased
+                    await channel.send(f"🎉 {member.mention} hat Level {new_level + 1} erreicht! Glückwunsch!")
 
 # Cog laden
 async def setup(bot):
