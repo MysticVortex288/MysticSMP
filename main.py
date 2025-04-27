@@ -1,28 +1,41 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 import os
 
 # Intents einstellen (benötigt, um Nachrichteninhalte zu lesen)
 intents = discord.Intents.default()
 intents.message_content = True
 
-# Bot erstellen mit dem Prefix "!"
-bot = commands.Bot(command_prefix="!", intents=intents)
+# Bot erstellen mit dem Prefix "!" und Unterstützung für Slash-Commands
+bot = commands.Bot(command_prefix="!", intents=intents, application_id="1355262227929891027")
 
 # Event: Wenn der Bot bereit ist
 @bot.event
 async def on_ready():
     print(f"✅ Bot ist online! Eingeloggt als {bot.user}")
 
-# Einfache Kommando "ping"
+    # Slash-Commands in allen Servern registrieren
+    await bot.tree.sync()
+
+# Prefixed Command (z.B. !ping)
 @bot.command()
 async def ping(ctx):
     await ctx.send("🏓 Pong!")
 
-# Weitere Beispiele für Commands:
+# Slash-Command (z.B. /ping)
+@bot.tree.command(name="ping", description="Antwortet mit Pong!")
+async def slash_ping(interaction: discord.Interaction):
+    await interaction.response.send_message("🏓 Pong!")
+
+# Weitere Beispiele für Prefixed- und Slash-Commands:
 @bot.command()
 async def hello(ctx):
     await ctx.send(f"Hallo {ctx.author.mention}! Ich bin ein Bot!")
+
+@bot.tree.command(name="hello", description="Begrüßt den Benutzer!")
+async def slash_hello(interaction: discord.Interaction):
+    await interaction.response.send_message(f"Hallo {interaction.user.mention}! Ich bin ein Bot!")
 
 # Hier holen wir den Token aus den Umgebungsvariablen
 TOKEN = os.environ.get("DISCORD_TOKEN")
