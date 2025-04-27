@@ -16,11 +16,11 @@ async def on_ready():
     print(f"✅ Bot ist online! Eingeloggt als {bot.user}")
 
     # Cog laden
-await bot.load_extension("invite-tracker")
-await bot.load_extension("verify")
-bot.tree.copy_global_to_all_guilds()  # <- DAS HINZUFÜGEN
-await bot.tree.sync()  # <- DAS HINZUFÜGEN
-# Hier kannst du andere globale Befehle hinzufügen, falls nötig
+async def load_extensions():
+    await bot.load_extension("invite-tracker")
+    await bot.load_extension("verify")
+    print("✅ Alle Cogs geladen.")
+
 @bot.command()
 async def ping(ctx):
     await ctx.send("🏓 Pong!")
