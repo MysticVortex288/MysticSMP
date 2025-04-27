@@ -2,41 +2,27 @@ import discord
 from discord.ext import commands
 import os
 
-# Intents einstellen (benötigt, um Nachrichteninhalte zu lesen)
+# Intents einstellen
 intents = discord.Intents.default()
-intents.members = True
-intents.invites = True
+intents.message_content = True
+intents.members = True  # Wichtiger Intent, um Mitglieder-Events wie on_member_join zu verfolgen
+
+# Bot erstellen
 bot = commands.Bot(command_prefix="!", intents=intents)
-
-
-
-# Bot erstellen mit dem Prefix "!" (nur Prefixed-Commands)
-bot = commands.Bot(command_prefix="!", intents=intents)
-# Cog laden
-async def load_cogs():
-    await bot.load_extension("invite-tracker")  # Ohne .py am Ende!
 
 # Event: Wenn der Bot bereit ist
 @bot.event
 async def on_ready():
     print(f"✅ Bot ist online! Eingeloggt als {bot.user}")
 
-# Prefixed Command (z.B. !ping)
+    # Cog laden
+    await bot.load_extension("invite_tracker")  # Lade das Cog ohne .py
+
+# Hier kannst du andere globale Befehle hinzufügen, falls nötig
 @bot.command()
 async def ping(ctx):
     await ctx.send("🏓 Pong!")
 
-# Weitere Beispielbefehle:
-@bot.command()
-async def hello(ctx):
-    await ctx.send(f"Hallo {ctx.author.mention}! Ich bin ein Bot!")
-
-# Hier holen wir den Token aus den Umgebungsvariablen
-TOKEN = os.environ.get("DISCORD_TOKEN")
-
-# Sicherstellen, dass der Token vorhanden ist
-if TOKEN is None:
-    raise ValueError("Kein Token gefunden! Stelle sicher, dass die Umgebungsvariable 'DISCORD_TOKEN' gesetzt ist.")
-
 # Bot starten
+TOKEN = os.environ.get("DISCORD_TOKEN")  # Token kommt aus den Railway Environment Variables
 bot.run(TOKEN)
