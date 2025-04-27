@@ -13,16 +13,34 @@ class InviteTracker(commands.Cog):
         # Überprüfen, wer die Einladung gemacht hat
         for invite in invites:
             if invite.uses > invite.max_uses:
-                message = f"{member.name} wurde von {invite.inviter} eingeladen."
+                inviter_name = invite.inviter.name
+                inviter_avatar = invite.inviter.avatar_url
+                message = f"**{member.name}** wurde von **{invite.inviter}** eingeladen!"
                 break
         else:
-            message = f"{member.name} wurde nicht von jemandem eingeladen."
+            inviter_name = "Unbekannt"
+            inviter_avatar = None
+            message = f"**{member.name}** wurde nicht von jemandem eingeladen."
 
-        # Nachricht im Channel senden
-        # Hier geben wir den Channel an, in dem die Nachricht gesendet werden soll
+        # Erstellen der Embed-Nachricht
+        embed = discord.Embed(
+            title="Willkommen im Server:Rainbow_Cat_Party~1:!",
+            description=message,
+            color=discord.Color.green()  # Du kannst auch andere Farben wie red() oder blue() wählen
+        )
+
+        # Füge das Avatar des Einladers hinzu, wenn vorhanden
+        if inviter_avatar:
+            embed.set_thumbnail(url=inviter_avatar)
+
+        # Fügt Emojis zur Embed-Nachricht hinzu
+        embed.add_field(name="🎉 Einladung", value=f"Einladung von: {inviter_name}", inline=False)
+        embed.add_field(name="🕒 Beitrittszeit", value=f"Beigetreten am: {member.joined_at.strftime('%d.%m.%Y, %H:%M')}", inline=True)
+
+        # Bestimmte Channel angeben (hier nach Name suchen)
         channel = discord.utils.get(member.guild.text_channels, name='allgemein')  # Oder den gewünschten Channel
         if channel:
-            await channel.send(message)
+            await channel.send(embed=embed)
 
     # Leaderboard für Einladungen
     @commands.command()
@@ -32,9 +50,16 @@ class InviteTracker(commands.Cog):
         leaderboard_message = ""
 
         for i, invite in enumerate(invites):
-            leaderboard_message += f"{i+1}. {invite.inviter} - {invite.uses} Einladungen\n"
+            leaderboard_message += f"{i+1}. **{invite.inviter}** - {invite.uses} Einladungen\n"
 
-        await ctx.send(leaderboard_message)
+        # Eine schönere Formatierung für das Leaderboard
+        embed = discord.Embed(
+            title="🏆 Einladung Leaderboard 🏆",
+            description=leaderboard_message,
+            color=discord.Color.blue()  # Blau für das Leaderboard
+        )
+
+        await ctx.send(embed=embed)
 
 # Cog laden
 async def setup(bot):
