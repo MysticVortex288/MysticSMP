@@ -16,7 +16,7 @@ async def on_ready():
     print(f"✅ Bot ist online! Eingeloggt als {bot.user}")
 
     # Cog laden
-    await bot.load_extension("invite_tracker")  # Lade das Cog ohne .py
+    await bot.load_extension("invite-tracker")  # Lade das Cog ohne .py
 
 # Hier kannst du andere globale Befehle hinzufügen, falls nötig
 @bot.command()
@@ -24,5 +24,5 @@ async def ping(ctx):
     await ctx.send("🏓 Pong!")
 
 # Bot starten
-TOKEN = os.environ.get("DISCORD_TOKEN")  # Token kommt aus den Railway Environment Variables
+TOKEN = os.environ.get("TOKEN")  # Token kommt aus den Railway Environment Variables
 bot.run(TOKEN)
