@@ -9,7 +9,10 @@ level_up_channel_id = None  # Kanal-ID, in dem Level-Up-Nachrichten gesendet wer
 
 # XP-Einstellungen (anpassbar)
 xp_per_message = 10  # Wie viel XP pro Nachricht
-xp_to_level_up = 100  # Wie viel XP man für das nächste Level benötigt
+
+# Funktion, um die XP für das nächste Level zu berechnen
+def xp_to_level_up(level):
+    return 100 * level  # Für Level 1 braucht man 100 XP, für Level 2 200 XP, etc.
 
 # Speichern der XP-Daten in einer Datei
 def save_xp_data():
@@ -54,32 +57,33 @@ class LevelingCog(commands.Cog):
 
     async def check_level_up(self, member):
         user_xp = xp_data.get(str(member.id), 0)
-        new_level = user_xp // xp_to_level_up
+        current_level = self.get_level(user_xp)
 
         # Abhängig vom Level eine Rolle vergeben und nur eine Nachricht senden, wenn das Level erreicht wurde
         roles = member.roles
-        role_name = f"Level {new_level + 1}"  # Level beginnt bei 1
+        role_name = f"Level {current_level + 1}"  # Level beginnt bei 1
 
         # Check if the member hasn't already reached the next level
-        if new_level >= 5 and "Level 5" not in [role.name for role in roles]:
-            role = discord.utils.get(member.guild.roles, name="Level 5")
-            if role:
-                await member.add_roles(role)
-                await member.send("🎉 Du hast Level 5 erreicht und eine neue Rolle erhalten!")
-
-        if new_level >= 10 and "Level 10" not in [role.name for role in roles]:
-            role = discord.utils.get(member.guild.roles, name="Level 10")
-            if role:
-                await member.add_roles(role)
-                await member.send("🎉 Du hast Level 10 erreicht und eine neue Rolle erhalten!")
+        for level in range(1, current_level + 1):
+            if f"Level {level}" not in [role.name for role in roles]:
+                role = discord.utils.get(member.guild.roles, name=f"Level {level}")
+                if role:
+                    await member.add_roles(role)
+                    await member.send(f"🎉 Du hast Level {level} erreicht und eine neue Rolle erhalten!")
 
         # Check and notify only if the user has leveled up
         if level_up_channel_id:
             channel = self.bot.get_channel(level_up_channel_id)
             if channel:
-                # Send a level up message only if the user has leveled up
-                if user_xp // xp_to_level_up > (user_xp - xp_per_message) // xp_to_level_up:  # Check if level increased
-                    await channel.send(f"🎉 {member.mention} hat Level {new_level + 1} erreicht! Glückwunsch!")
+                if user_xp // xp_to_level_up(current_level) > (user_xp - xp_per_message) // xp_to_level_up(current_level):
+                    await channel.send(f"🎉 {member.mention} hat Level {current_level + 1} erreicht! Glückwunsch!")
+
+    def get_level(self, xp):
+        """Berechnet das Level basierend auf der XP des Benutzers."""
+        level = 0
+        while xp >= xp_to_level_up(level + 1):
+            level += 1
+        return level
 
     @commands.command()
     async def levelleaderboard(self, ctx):
@@ -94,7 +98,7 @@ class LevelingCog(commands.Cog):
         # Füge die Top 10 Mitglieder hinzu
         for index, (user_id, xp) in enumerate(leaderboard[:10]):
             user = self.bot.get_user(int(user_id))
-            level = xp // xp_to_level_up
+            level = self.get_level(xp)
             embed.add_field(
                 name=f"#{index + 1} - {user.name}",
                 value=f"XP: {xp} | Level: {level + 1}",
@@ -108,8 +112,8 @@ class LevelingCog(commands.Cog):
         """Zeigt das Profil des Benutzers mit seinen XP und Level an."""
         user_id = str(ctx.author.id)
         user_xp = xp_data.get(user_id, 0)
-        user_level = user_xp // xp_to_level_up
-        xp_remaining = xp_to_level_up - (user_xp % xp_to_level_up)
+        user_level = self.get_level(user_xp)
+        xp_remaining = xp_to_level_up(user_level + 1) - (user_xp)
 
         embed = discord.Embed(
             title=f"👤 {ctx.author.name}'s Profil",
