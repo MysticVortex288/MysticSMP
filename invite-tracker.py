@@ -24,7 +24,7 @@ class InviteTracker(commands.Cog):
 
         # Erstellen der Embed-Nachricht
         embed = discord.Embed(
-            title="Willkommen im Server: Rainbow_Cat_Party! 🎉",
+            title="Willkommen im Server:Rainbow_Cat_Party:! 🎉",
             description=message,
             color=discord.Color.green()  # Du kannst auch andere Farben wie red() oder blue() wählen
         )
