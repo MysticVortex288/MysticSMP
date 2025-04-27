@@ -3,8 +3,9 @@ from discord.ext import commands
 import json
 import os
 
-# XP-Daten
+# XP-Daten und Level-Setup
 xp_data = {}
+level_up_channel_id = None  # Kanal-ID, in dem Level-Up-Nachrichten gesendet werden
 
 # XP-Einstellungen (anpassbar)
 xp_per_message = 10  # Wie viel XP pro Nachricht
@@ -25,6 +26,15 @@ def load_xp_data():
 class LevelingCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.bot.add_view(VerificationView())  # Falls ein View hinzugefügt werden muss
+        load_xp_data()  # XP-Daten laden
+
+    @commands.command()
+    async def levelsetup(self, ctx, channel: discord.TextChannel):
+        """Admin-Befehl, um den Level-Up-Kanal festzulegen."""
+        global level_up_channel_id
+        level_up_channel_id = channel.id  # Speichern der Kanal-ID
+        await ctx.send(f"✅ Der Level-Up Kanal wurde auf {channel.mention} gesetzt!")
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -53,16 +63,24 @@ class LevelingCog(commands.Cog):
             if role:
                 await member.add_roles(role)
                 await member.send("🎉 Du hast Level 5 erreicht und eine neue Rolle erhalten!")
+
         if user_level >= 10 and "Level 10" not in [role.name for role in roles]:
             role = discord.utils.get(member.guild.roles, name="Level 10")
             if role:
                 await member.add_roles(role)
                 await member.send("🎉 Du hast Level 10 erreicht und eine neue Rolle erhalten!")
+
         if user_level >= 15 and "Level 15" not in [role.name for role in roles]:
             role = discord.utils.get(member.guild.roles, name="Level 15")
             if role:
                 await member.add_roles(role)
                 await member.send("🎉 Du hast Level 15 erreicht und eine neue Rolle erhalten!")
+
+        # Level-Up-Nachricht senden, wenn ein Kanal festgelegt wurde
+        if level_up_channel_id:
+            channel = self.bot.get_channel(level_up_channel_id)
+            if channel:
+                await channel.send(f"🎉 {member.mention} hat Level {user_level} erreicht! Glückwunsch!")
 
 # Cog laden
 async def setup(bot):
