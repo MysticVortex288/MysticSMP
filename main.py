@@ -24,5 +24,5 @@ async def ping(ctx):
     await ctx.send("🏓 Pong!")
 
 # Bot starten
-TOKEN = os.environ.get("TOKEN")  # Token kommt aus den Railway Environment Variables
+TOKEN = os.environ.get("DISCORD_TOKEN")  # Token kommt aus den Railway Environment Variables
 bot.run(TOKEN)
