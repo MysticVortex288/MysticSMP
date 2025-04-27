@@ -14,7 +14,7 @@ class InviteTracker(commands.Cog):
         for invite in invites:
             if invite.uses > invite.max_uses:
                 inviter_name = invite.inviter.name
-              inviter_avatar = invite.inviter.avatar.url
+                inviter_avatar = invite.inviter.avatar.url  # Hier war der Fehler
                 message = f"**{member.name}** wurde von **{invite.inviter}** eingeladen!"
                 break
         else:
@@ -24,7 +24,7 @@ class InviteTracker(commands.Cog):
 
         # Erstellen der Embed-Nachricht
         embed = discord.Embed(
-            title="Willkommen im Server:Rainbow_Cat_Party~1:!",
+            title="Willkommen im Server: Rainbow_Cat_Party! 🎉",
             description=message,
             color=discord.Color.green()  # Du kannst auch andere Farben wie red() oder blue() wählen
         )
