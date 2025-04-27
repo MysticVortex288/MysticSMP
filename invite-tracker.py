@@ -31,5 +31,5 @@ class InviteTracker(commands.Cog):
         await ctx.send(leaderboard_message)
 
 # Cog laden
-def setup(bot):
-    bot.add_cog(InviteTracker(bot))
+async def setup(bot):
+  await bot.add_cog(InviteTracker(bot))  # Mit await
