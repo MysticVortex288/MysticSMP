@@ -81,6 +81,48 @@ class LevelingCog(commands.Cog):
                 if user_xp // xp_to_level_up > (user_xp - xp_per_message) // xp_to_level_up:  # Check if level increased
                     await channel.send(f"🎉 {member.mention} hat Level {new_level + 1} erreicht! Glückwunsch!")
 
+    @commands.command()
+    async def levelleaderboard(self, ctx):
+        """Zeigt das Level-Leaderboard an."""
+        leaderboard = sorted(xp_data.items(), key=lambda x: x[1], reverse=True)
+        embed = discord.Embed(
+            title="🏆 Level Leaderboard",
+            description="Hier ist das aktuelle Level-Leaderboard:",
+            color=discord.Color.blue()
+        )
+
+        # Füge die Top 10 Mitglieder hinzu
+        for index, (user_id, xp) in enumerate(leaderboard[:10]):
+            user = self.bot.get_user(int(user_id))
+            level = xp // xp_to_level_up
+            embed.add_field(
+                name=f"#{index + 1} - {user.name}",
+                value=f"XP: {xp} | Level: {level + 1}",
+                inline=False
+            )
+
+        await ctx.send(embed=embed)
+
+    @commands.command()
+    async def profile(self, ctx):
+        """Zeigt das Profil des Benutzers mit seinen XP und Level an."""
+        user_id = str(ctx.author.id)
+        user_xp = xp_data.get(user_id, 0)
+        user_level = user_xp // xp_to_level_up
+        xp_remaining = xp_to_level_up - (user_xp % xp_to_level_up)
+
+        embed = discord.Embed(
+            title=f"👤 {ctx.author.name}'s Profil",
+            description=f"Hier sind deine aktuellen XP und dein Fortschritt!",
+            color=discord.Color.green()
+        )
+
+        embed.add_field(name="XP", value=f"{user_xp} XP", inline=False)
+        embed.add_field(name="Level", value=f"Level {user_level + 1}", inline=False)
+        embed.add_field(name="XP bis zum nächsten Level", value=f"{xp_remaining} XP", inline=False)
+
+        await ctx.send(embed=embed)
+
 # Cog laden
 async def setup(bot):
     await bot.add_cog(LevelingCog(bot))  # Cog hinzufügen
