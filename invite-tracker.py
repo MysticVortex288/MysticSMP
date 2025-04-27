@@ -14,7 +14,7 @@ class InviteTracker(commands.Cog):
         for invite in invites:
             if invite.uses > invite.max_uses:
                 inviter_name = invite.inviter.name
-                inviter_avatar = invite.inviter.avatar_url
+              inviter_avatar = invite.inviter.avatar.url
                 message = f"**{member.name}** wurde von **{invite.inviter}** eingeladen!"
                 break
         else:
