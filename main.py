@@ -14,13 +14,14 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 @bot.event
 async def on_ready():
     print(f"✅ Bot ist online! Eingeloggt als {bot.user}")
-    
+
     # Cog laden
     await load_extensions()
 
 async def load_extensions():
     await bot.load_extension("invite-tracker")
     await bot.load_extension("level")
+     await bot.load_extension("counting")
     print("✅ Alle Cogs geladen.")
 
 @bot.command()
