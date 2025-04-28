@@ -18,11 +18,12 @@ async def on_ready():
     # Cog laden
     await load_extensions()
 
-async def load_extensions():
     await bot.load_extension("invite-tracker")
     await bot.load_extension("level")
-     await bot.load_extension("counting")
+    await bot.load_extension("counting")  # Hier dein Counting Cog
     print("✅ Alle Cogs geladen.")
+
+   
 
 @bot.command()
 async def ping(ctx):
