@@ -7,7 +7,7 @@ class HelpCog(commands.Cog, name="Hilfe"):
         self.bot = bot
 
     @commands.command()
-    async def help(self, ctx):
+    async def hilfe(self, ctx):
         embed = discord.Embed(
             title="🔍 Bot Befehle",
             description="Hier sind alle verfügbaren Befehle:",
@@ -41,7 +41,10 @@ class HelpCog(commands.Cog, name="Hilfe"):
         # Admin Befehle
         embed.add_field(
             name="👑 Admin Befehle",
-            value="`!levelsetup <channel>` - Legt den Level-Up Benachrichtigungskanal fest",
+            value="""
+`!levelsetup <channel>` - Legt den Level-Up Benachrichtigungskanal fest
+`!countingsetup <channel>` - Legt den Zählkanal fest
+            """,
             inline=False
         )
 
