@@ -34,6 +34,12 @@ async def on_ready():
     except Exception as e:
         print(f"❌ Fehler bei help: {e}")
 
+    try:
+        await bot.load_extension("counting")
+        print("✅ counting geladen")
+    except Exception as e:
+        print(f"❌ Fehler bei counting: {e}")
+
 
 
 @bot.command()
