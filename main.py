@@ -20,10 +20,9 @@ async def on_ready():
 
     await bot.load_extension("invite-tracker")
     await bot.load_extension("level")
-    await bot.load_extension("counting")  # Hier dein Counting Cog
     print("✅ Alle Cogs geladen.")
 
-   
+
 
 @bot.command()
 async def ping(ctx):
@@ -32,3 +31,4 @@ async def ping(ctx):
 # Bot starten
 TOKEN = os.environ.get("DISCORD_TOKEN")  # Token kommt aus den Railway Environment Variables
 bot.run(TOKEN)
+ 
