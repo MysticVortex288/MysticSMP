@@ -5,7 +5,7 @@ import os
 # Intents einstellen
 intents = discord.Intents.default()
 intents.message_content = True
-intents.members = True  # Wichtiger Intent, um Mitglieder-Events wie on_member_join zu verfolgen
+intents.members = True  # Für Member-Events wie on_member_join
 
 # Bot erstellen
 bot = commands.Bot(command_prefix="!", intents=intents)
@@ -15,12 +15,18 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 async def on_ready():
     print(f"✅ Bot ist online! Eingeloggt als {bot.user}")
 
-    # Cog laden
-    await load_extensions()
+    # Cogs laden
+    try:
+        await bot.load_extension("invite-tracker")
+        print("✅ invite-tracker geladen")
+    except Exception as e:
+        print(f"❌ Fehler bei invite-tracker: {e}")
 
-    await bot.load_extension("invite-tracker")
-    await bot.load_extension("level")
-    print("✅ Alle Cogs geladen.")
+    try:
+        await bot.load_extension("level")
+        print("✅ level geladen")
+    except Exception as e:
+        print(f"❌ Fehler bei level: {e}")
 
 
 
@@ -31,4 +37,3 @@ async def ping(ctx):
 # Bot starten
 TOKEN = os.environ.get("DISCORD_TOKEN")  # Token kommt aus den Railway Environment Variables
 bot.run(TOKEN)
- 
