@@ -28,6 +28,12 @@ async def on_ready():
     except Exception as e:
         print(f"❌ Fehler bei level: {e}")
 
+    try:
+        await bot.load_extension("help")
+        print("✅ help geladen")
+    except Exception as e:
+        print(f"❌ Fehler bei help: {e}")
+
 
 
 @bot.command()
