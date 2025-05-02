@@ -1,51 +1,45 @@
-import discord
-from discord.ext import commands
+import asyncio
+import logging
 import os
+from dotenv import load_dotenv
 
-# Intents einstellen
-intents = discord.Intents.default()
-intents.message_content = True
-intents.members = True  # Für Member-Events wie on_member_join
+from bot import initialize_bot
 
-# Bot erstellen
-bot = commands.Bot(command_prefix="!", intents=intents)
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler()
+    ]
+)
 
-# Event: Wenn der Bot bereit ist
-@bot.event
-async def on_ready():
-    print(f"✅ Bot ist online! Eingeloggt als {bot.user}")
+logger = logging.getLogger('discord_bot')
 
-    # Cogs laden
+# Load environment variables
+load_dotenv()
+
+# Main function to run the bot
+async def main():
+    # Get the token from environment variables
+    token = os.getenv('DISCORD_TOKEN')
+    
+    if not token:
+        logger.error("No Discord token found. Please set the DISCORD_TOKEN environment variable.")
+        return
+
+    # Initialize and run the bot
+    bot = await initialize_bot()
+    
     try:
-        await bot.load_extension("invite-tracker")
-        print("✅ invite-tracker geladen")
+        logger.info("Starting bot...")
+        await bot.start(token)
     except Exception as e:
-        print(f"❌ Fehler bei invite-tracker: {e}")
+        logger.error(f"Error starting bot: {e}")
+    finally:
+        if not bot.is_closed():
+            await bot.close()
 
-    try:
-        await bot.load_extension("level")
-        print("✅ level geladen")
-    except Exception as e:
-        print(f"❌ Fehler bei level: {e}")
-
-    try:
-        await bot.load_extension("bothelp")
-        print("✅ bothelp geladen")
-    except Exception as e:
-        print(f"❌ Fehler bei bothelp: {e}")
-
-    try:
-        await bot.load_extension("counting")
-        print("✅ counting geladen")
-    except Exception as e:
-        print(f"❌ Fehler bei counting: {e}")
-
-
-
-@bot.command()
-async def ping(ctx):
-    await ctx.send("🏓 Pong!")
-
-# Bot starten
-TOKEN = os.environ.get("DISCORD_TOKEN")  # Token kommt aus den Railway Environment Variables
-bot.run(TOKEN)
+# Entry point
+if __name__ == "__main__":
+    asyncio.run(main())
