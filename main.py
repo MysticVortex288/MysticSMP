@@ -1,54 +1,51 @@
-
 import discord
 from discord.ext import commands
+import os
 
-class HelpCog(commands.Cog, name="Hilfe"):
-    def __init__(self, bot):
-        self.bot = bot
+# Intents einstellen
+intents = discord.Intents.default()
+intents.message_content = True
+intents.members = True  # Für Member-Events wie on_member_join
 
-    @commands.command()
-    async def hilfe(self, ctx):
-        embed = discord.Embed(
-            title="🔍 Bot Befehle",
-            description="Hier sind alle verfügbaren Befehle:",
-            color=discord.Color.blue()
-        )
+# Bot erstellen
+bot = commands.Bot(command_prefix="!", intents=intents)
 
-        # Level System Kategorie
-        embed.add_field(
-            name="📊 Level System",
-            value="""
-`!profile` - Zeigt dein Level-Profil an
-`!levelleaderboard` - Zeigt die Top 10 der aktivsten Nutzer
-            """,
-            inline=False
-        )
+# Event: Wenn der Bot bereit ist
+@bot.event
+async def on_ready():
+    print(f"✅ Bot ist online! Eingeloggt als {bot.user}")
 
-        # Einladungs System Kategorie
-        embed.add_field(
-            name="📨 Einladungen",
-            value="`!leaderboard` - Zeigt die Einladungs-Rangliste",
-            inline=False
-        )
+    # Cogs laden
+    try:
+        await bot.load_extension("invite-tracker")
+        print("✅ invite-tracker geladen")
+    except Exception as e:
+        print(f"❌ Fehler bei invite-tracker: {e}")
 
-        # Allgemeine Befehle
-        embed.add_field(
-            name="🛠️ Allgemein",
-            value="`!ping` - Prüft ob der Bot online ist",
-            inline=False
-        )
+    try:
+        await bot.load_extension("level")
+        print("✅ level geladen")
+    except Exception as e:
+        print(f"❌ Fehler bei level: {e}")
 
-        # Admin Befehle
-        embed.add_field(
-            name="👑 Admin Befehle",
-            value="""
-`!levelsetup <channel>` - Legt den Level-Up Benachrichtigungskanal fest
-`!countingsetup <channel>` - Legt den Zählkanal fest
-            """,
-            inline=False
-        )
+    try:
+        await bot.load_extension("bothelp")
+        print("✅ bothelp geladen")
+    except Exception as e:
+        print(f"❌ Fehler bei bothelp: {e}")
 
-        await ctx.send(embed=embed)
+    try:
+        await bot.load_extension("counting")
+        print("✅ counting geladen")
+    except Exception as e:
+        print(f"❌ Fehler bei counting: {e}")
 
-async def setup(bot):
-    await bot.add_cog(HelpCog(bot))
+
+
+@bot.command()
+async def ping(ctx):
+    await ctx.send("🏓 Pong!")
+
+# Bot starten
+TOKEN = os.environ.get("DISCORD_TOKEN")  # Token kommt aus den Railway Environment Variables
+bot.run(TOKEN)
