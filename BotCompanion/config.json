@@ -1,0 +1,37 @@
+{
+    "prefix": "!",
+    "default_welcome_message": "Welcome to the server, {user_mention}! You were invited by {inviter}.",
+    "default_welcome_channel": null,
+    "default_welcome_enabled": false,
+    "default_welcome_embed_color": "0x3498db",
+    "default_welcome_embed_enabled": true,
+    "guilds": {
+        "1355262405726175354": {
+            "welcome_channel": 1355533979515617370,
+            "welcome_message": "Welcome to the server, {user_mention}! You were invited by {inviter}.",
+            "welcome_enabled": true,
+            "welcome_embed_color": "0x3498db",
+            "welcome_embed_enabled": true,
+            "invites": {
+                "U6Qjcnav": {
+                    "inviter_id": 1338909801865810041,
+                    "uses": 10,
+                    "max_uses": 0,
+                    "created_at": "2025-04-27T11:31:42.447000+00:00"
+                },
+                "kfmbDwvd": {
+                    "inviter_id": 1338909801865810041,
+                    "uses": 1,
+                    "max_uses": 0,
+                    "created_at": "2025-05-04T11:07:41.225000+00:00"
+                },
+                "75QbuNGZ": {
+                    "inviter_id": 1338909801865810041,
+                    "uses": 3,
+                    "max_uses": 0,
+                    "created_at": "2025-05-09T14:48:07.166000+00:00"
+                }
+            }
+        }
+    }
+}

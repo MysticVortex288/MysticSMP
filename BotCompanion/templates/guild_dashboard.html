@@ -1,0 +1,463 @@
+{% extends 'base.html' %}
+
+{% block title %}MysticSMP Bot - Dashboard für {{ guild.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <a href="{{ url_for('server_selection') }}" class="btn btn-outline-secondary me-3">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        {% if guild.icon %}
+                        <img src="https://cdn.discordapp.com/icons/{{ guild.id }}/{{ guild.icon }}.png" alt="{{ guild.name }}" class="rounded-circle me-3" width="60" height="60">
+                        {% else %}
+                        <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px;">
+                            <span class="text-white fs-4">{{ guild.name[:2] }}</span>
+                        </div>
+                        {% endif %}
+                        <div>
+                            <h1 class="mb-0">{{ guild.name }}</h1>
+                            <p class="text-muted mb-0">Server-ID: {{ guild.id }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0"><i class="fas fa-cogs me-2"></i> Bot-Module</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        <!-- Economy-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-coins fa-3x mb-3 text-warning"></i>
+                                    <h5 class="card-title">Economy</h5>
+                                    <p class="card-text small">
+                                        Verwalte Wirtschaftsbefehle wie Work, Daily, Rob und Pay.
+                                    </p>
+                                    <a href="{{ url_for('economy') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('economy', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('economy', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Invite Tracking -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-user-plus fa-3x mb-3 text-primary"></i>
+                                    <h5 class="card-title">Invite Tracking</h5>
+                                    <p class="card-text small">
+                                        Überwache, wer wen auf deinen Server eingeladen hat.
+                                    </p>
+                                    <a href="{{ url_for('invite_tracker') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('invite_tracker', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('invite_tracker', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Welcome-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-door-open fa-3x mb-3 text-info"></i>
+                                    <h5 class="card-title">Willkommensnachrichten</h5>
+                                    <p class="card-text small">
+                                        Personalisierte Nachrichten für neue Mitglieder.
+                                    </p>
+                                    <a href="{{ url_for('welcome') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('welcome', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('welcome', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Levels-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-chart-line fa-3x mb-3 text-success"></i>
+                                    <h5 class="card-title">Level-System</h5>
+                                    <p class="card-text small">
+                                        Verwalte Level, XP-Raten und Rollenbelohnungen.
+                                    </p>
+                                    <a href="{{ url_for('levels') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('levels', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('levels', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tickets-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-ticket-alt fa-3x mb-3 text-danger"></i>
+                                    <h5 class="card-title">Ticket-System</h5>
+                                    <p class="card-text small">
+                                        Support-Tickets für deine Mitglieder.
+                                    </p>
+                                    <a href="{{ url_for('tickets') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('tickets', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('tickets', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Admin-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-shield-alt fa-3x mb-3 text-danger"></i>
+                                    <h5 class="card-title">Admin-Befehle</h5>
+                                    <p class="card-text small">
+                                        Server- und Bot-Administration.
+                                    </p>
+                                    <button class="btn btn-sm btn-outline-secondary w-100" disabled>
+                                        <i class="fas fa-info-circle me-1"></i> Nur im Discord
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Counting-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-list-ol fa-3x mb-3 text-primary"></i>
+                                    <h5 class="card-title">Counting-Game</h5>
+                                    <p class="card-text small">
+                                        Ein interaktives Zählspiel für deinen Server.
+                                    </p>
+                                    <a href="{{ url_for('counting') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('counting', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('counting', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TempVoice-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-microphone-alt fa-3x mb-3 text-secondary"></i>
+                                    <h5 class="card-title">Temp Voice</h5>
+                                    <p class="card-text small">
+                                        Temporäre Sprachkanäle für deine Mitglieder.
+                                    </p>
+                                    <a href="{{ url_for('temp_voice') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('temp_voice', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('temp_voice', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Verification-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-user-check fa-3x mb-3 text-success"></i>
+                                    <h5 class="card-title">Verification</h5>
+                                    <p class="card-text small">
+                                        Verifizierungssystem für neue Mitglieder.
+                                    </p>
+                                    <a href="{{ url_for('verification') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('verification', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('verification', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ContentAnnouncer-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-bullhorn fa-3x mb-3 text-warning"></i>
+                                    <h5 class="card-title">Content Announcer</h5>
+                                    <p class="card-text small">
+                                        Kündige YouTube, Twitch oder TikTok-Content an.
+                                    </p>
+                                    <a href="{{ url_for('content_announcer') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('content_announcer', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('content_announcer', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Self-Roles-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-tags fa-3x mb-3 text-info"></i>
+                                    <h5 class="card-title">Self-Roles</h5>
+                                    <p class="card-text small">
+                                        Lass Mitglieder sich selbst Rollen zuweisen.
+                                    </p>
+                                    <a href="{{ url_for('self_roles') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('self_roles', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('self_roles', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bot-Assistent-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-question-circle fa-3x mb-3 text-primary"></i>
+                                    <h5 class="card-title">Bot-Assistent</h5>
+                                    <p class="card-text small">
+                                        Beantwortet Fragen über den Bot in Assistenzkanälen.
+                                    </p>
+                                    <a href="{{ url_for('bot_assistant') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('bot_assistant', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('bot_assistant', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Server-Stats-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-chart-bar fa-3x mb-3 text-success"></i>
+                                    <h5 class="card-title">Server-Statistiken</h5>
+                                    <p class="card-text small">
+                                        Zeige Live-Statistiken zu deinem Server an.
+                                    </p>
+                                    <a href="{{ url_for('server_stats') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('server_stats', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('server_stats', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Language-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-language fa-3x mb-3 text-info"></i>
+                                    <h5 class="card-title">Spracheinstellungen</h5>
+                                    <p class="card-text small">
+                                        Wähle zwischen Deutsch und Englisch für den Bot.
+                                    </p>
+                                    <a href="{{ url_for('language') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('language', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('language', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Channel-Locker-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-lock fa-3x mb-3 text-warning"></i>
+                                    <h5 class="card-title">Channel-Locker</h5>
+                                    <p class="card-text small">
+                                        Sperre Kanäle für bestimmte Zeiträume.
+                                    </p>
+                                    <a href="{{ url_for('channel_locker') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('channel_locker', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('channel_locker', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Emoji-Stealer-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-smile fa-3x mb-3 text-warning"></i>
+                                    <h5 class="card-title">Emoji-Stealer</h5>
+                                    <p class="card-text small">
+                                        Kopiere Emojis von anderen Servern.
+                                    </p>
+                                    <a href="{{ url_for('emoji_stealer') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('emoji_stealer', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('emoji_stealer', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Captcha-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-robot fa-3x mb-3 text-primary"></i>
+                                    <h5 class="card-title">Captcha-Verifizierung</h5>
+                                    <p class="card-text small">
+                                        Schütze deinen Server mit Captcha-Verifikation.
+                                    </p>
+                                    <a href="{{ url_for('captcha') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('captcha', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('captcha', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Moderation-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-gavel fa-3x mb-3 text-danger"></i>
+                                    <h5 class="card-title">Moderation</h5>
+                                    <p class="card-text small">
+                                        Kick, Ban, Mute und mehr für deine Moderatoren.
+                                    </p>
+                                    <a href="{{ url_for('moderation') }}?guild_id={{ guild.id }}" class="btn btn-sm {% if server_config.get('moderation', False) %}btn-success{% else %}btn-outline-secondary{% endif %} w-100">
+                                        {% if server_config.get('moderation', False) %}
+                                        <i class="fas fa-check-circle me-1"></i> Konfiguriert
+                                        {% else %}
+                                        <i class="fas fa-wrench me-1"></i> Konfigurieren
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Musik-Modul -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-music fa-3x mb-3 text-info"></i>
+                                    <h5 class="card-title">Musik-Player</h5>
+                                    <p class="card-text small">
+                                        Spiele Musik von YouTube, Spotify und mehr.
+                                    </p>
+                                    <button class="btn btn-sm btn-outline-secondary w-100" disabled>
+                                        <i class="fas fa-info-circle me-1"></i> Nur im Discord
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h3 class="card-title mb-0"><i class="fas fa-server me-2"></i> Server-Informationen</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Server-ID
+                            <span class="badge bg-primary">{{ guild.id }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Bot-Status
+                            <span class="badge bg-success">Aktiv</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Konfigurierte Module
+                            <span class="badge bg-info">{{ server_config.values()|select|list|length }} / {{ server_config|length }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title mb-0"><i class="fas fa-link me-2"></i> Wichtige Links</h3>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="{{ url_for('server_selection') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-server me-2"></i> Server-Übersicht
+                        </a>
+                        <a href="https://discord.com/channels/{{ guild.id }}" target="_blank" class="list-group-item list-group-item-action">
+                            <i class="fab fa-discord me-2"></i> Discord-Server öffnen
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="fas fa-book me-2"></i> Dokumentation
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="fas fa-life-ring me-2"></i> Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

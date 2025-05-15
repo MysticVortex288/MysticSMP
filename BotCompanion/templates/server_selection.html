@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}MysticSMP Bot - Server Auswahl{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h1 class="display-5 mb-3">Wähle einen Discord-Server</h1>
+                    <p class="lead">
+                        Wähle einen deiner Discord-Server, um den Bot zu konfigurieren oder lade den Bot zu einem neuen Server ein.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if guilds_with_bot %}
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-check-circle me-2"></i> Server mit Bot
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        {% for guild in guilds_with_bot %}
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    {% if guild.icon %}
+                                    <img src="https://cdn.discordapp.com/icons/{{ guild.id }}/{{ guild.icon }}.png" alt="{{ guild.name }}" class="rounded-circle mb-3" width="80" height="80">
+                                    {% else %}
+                                    <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
+                                        <span class="text-white fs-4">{{ guild.name[:2] }}</span>
+                                    </div>
+                                    {% endif %}
+                                    <h5 class="card-title">{{ guild.name }}</h5>
+                                    <a href="{{ url_for('guild_dashboard', guild_id=guild.id) }}" class="btn btn-primary mt-2">
+                                        <i class="fas fa-cogs me-2"></i> Konfigurieren
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if guilds_without_bot %}
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-plus-circle me-2"></i> Bot hinzufügen
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text mb-4">
+                        Lade den Bot auf einen deiner Server ein, um ihn dort zu nutzen und zu konfigurieren.
+                    </p>
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        {% for guild in guilds_without_bot %}
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    {% if guild.icon %}
+                                    <img src="https://cdn.discordapp.com/icons/{{ guild.id }}/{{ guild.icon }}.png" alt="{{ guild.name }}" class="rounded-circle mb-3" width="80" height="80">
+                                    {% else %}
+                                    <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
+                                        <span class="text-white fs-4">{{ guild.name[:2] }}</span>
+                                    </div>
+                                    {% endif %}
+                                    <h5 class="card-title">{{ guild.name }}</h5>
+                                    <a href="{{ bot_invite_url }}&guild_id={{ guild.id }}" class="btn btn-outline-success mt-2" target="_blank">
+                                        <i class="fas fa-robot me-2"></i> Bot einladen
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if not guilds_with_bot and not guilds_without_bot %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+                    <h4>Keine Server gefunden</h4>
+                    <p>Du scheinst keine Server zu haben, auf denen du Administrator-Berechtigungen hast.</p>
+                    <p>Um den Bot nutzen zu können, benötigst du einen Discord-Server mit Administrator-Berechtigungen.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

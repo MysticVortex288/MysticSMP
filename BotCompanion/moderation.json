@@ -1,0 +1,52 @@
+{
+    "log_channels": {
+        "1355262405726175354": 1355602407563722883
+    },
+    "case_counts": {
+        "1355262405726175354": 4
+    },
+    "actions": {
+        "1355262405726175354": [
+            {
+                "action_type": "mute",
+                "user_id": 1084884132510842960,
+                "moderator_id": 1338909801865810041,
+                "reason": "Isst zu viel",
+                "timestamp": "2025-05-10T06:03:19.116993",
+                "duration": 30,
+                "case_id": 1,
+                "guild_id": 1355262405726175354
+            },
+            {
+                "action_type": "warn",
+                "user_id": 1084884132510842960,
+                "moderator_id": 1338909801865810041,
+                "reason": "noch einmal dann siehst du wa",
+                "timestamp": "2025-05-10T06:04:35.404704",
+                "duration": null,
+                "case_id": 2,
+                "guild_id": 1355262405726175354
+            },
+            {
+                "action_type": "allclear",
+                "user_id": 1338909801865810041,
+                "moderator_id": 1338909801865810041,
+                "reason": "Alle Nachrichten in #ticket gel\u00f6scht",
+                "timestamp": "2025-05-10T06:18:45.218279",
+                "duration": null,
+                "case_id": 3,
+                "guild_id": 1355262405726175354
+            },
+            {
+                "action_type": "allclear",
+                "user_id": 1338909801865810041,
+                "moderator_id": 1338909801865810041,
+                "reason": "Alle Nachrichten in #rollen gel\u00f6scht",
+                "timestamp": "2025-05-10T06:31:07.581590",
+                "duration": null,
+                "case_id": 4,
+                "guild_id": 1355262405726175354
+            }
+        ]
+    }
+}

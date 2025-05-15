@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Discord Bot Download</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #2c2f33;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #36393f;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #7289da;
+            text-align: center;
+        }
+        .download-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #2f3136;
+            border-radius: 5px;
+        }
+        .download-button {
+            display: inline-block;
+            background-color: #7289da;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .download-button:hover {
+            background-color: #5b6eae;
+        }
+        .code-block {
+            background-color: #202225;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        .instruction-list {
+            line-height: 1.6;
+        }
+        .file-list {
+            margin-top: 20px;
+            background-color: #2f3136;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .file-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #40444b;
+        }
+        .file-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Discord Bot - Download</h1>
+        
+        <div class="download-section">
+            <h2>Download Optionen</h2>
+            <p>Hier kannst du den Discord Bot herunterladen:</p>
+            
+            <a href="/download/mybot" class="download-button">Komplettes Projekt (24 MB)</a>
+            <a href="/download/project" class="download-button">Kompaktes Projekt (2.8 MB)</a>
+            
+            <p><strong>Hinweis:</strong> Falls Google Chrome eine Warnung anzeigt, kannst du auf "Trotzdem behalten" klicken.</p>
+        </div>
+        
+        <div class="download-section">
+            <h2>Installations-Anleitung</h2>
+            
+            <ol class="instruction-list">
+                <li>Entpacke die ZIP-Datei in einen neuen Ordner</li>
+                <li>Erstelle eine <code>.env</code> Datei mit folgenden Informationen:</li>
+                <div class="code-block">
+DISCORD_TOKEN=dein_discord_bot_token
+DISCORD_CLIENT_ID=dein_discord_client_id
+DISCORD_CLIENT_SECRET=dein_discord_client_secret</div>
+                <li>Installiere die benötigten Pakete:</li>
+                <div class="code-block">pip install -r packages_list.txt</div>
+                <li>Starte den Bot:</li>
+                <div class="code-block">python main.py</div>
+            </ol>
+        </div>
+        
+        <div class="file-list">
+            <h2>Wichtige Dateien</h2>
+            
+            <div class="file-item"><strong>main.py</strong> - Hauptdatei des Bots</div>
+            <div class="file-item"><strong>bot.py</strong> - Bot-Konfiguration und Initialisierung</div>
+            <div class="file-item"><strong>app.py</strong> - Web-Dashboard</div>
+            <div class="file-item"><strong>cogs/</strong> - Ordner mit allen Funktionsmodulen</div>
+            <div class="file-item"><strong>templates/</strong> - HTML-Vorlagen für das Dashboard</div>
+            <div class="file-item"><strong>static/</strong> - Statische Dateien (CSS, JS, Bilder)</div>
+            <div class="file-item"><strong>utils/</strong> - Hilfsfunktionen</div>
+            <div class="file-item"><strong>*.json</strong> - Konfigurationsdateien</div>
+        </div>
+    </div>
+</body>
+</html>

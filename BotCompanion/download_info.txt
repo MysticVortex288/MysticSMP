@@ -1,0 +1,23 @@
+=======================================
+DISCORD BOT - DOWNLOAD UND INSTALLATION
+=======================================
+
+Download-Seite: https://workspace.sukhjitmultani2.replit.app/downloads
+
+Auf dieser Seite findest du:
+1. Die Download-Links für den Bot (komplett oder kompakt)
+2. Eine Anleitung zur Installation
+3. Eine Übersicht der wichtigsten Dateien
+4. Link zur vollständigen Dokumentation 
+
+Bei Problemen mit dem Download:
+- Klicke auf "Trotzdem behalten" in Google Chrome
+- Versuche den alternativen Link
+
+Installation:
+1. Entpacke die ZIP-Datei in einen Ordner
+2. Erstelle eine .env Datei mit deinem Bot-Token
+3. Installiere die Pakete mit: pip install -r packages_list.txt
+4. Starte den Bot mit: python main.py
+
+Viel Spaß mit deinem Discord Bot!

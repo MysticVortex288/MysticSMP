@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Download-Bereich{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Download-Bereich</h2>
+                </div>
+                <div class="card-body">
+                    <h4 class="mb-4">Verfügbare Downloads</h4>
+                    
+                    <div class="list-group mb-4">
+                        <a href="/download/mybot" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            Vollständiger Bot (alle Dateien)
+                            <span class="badge bg-primary rounded-pill">24 MB</span>
+                        </a>
+                        <a href="/download/project" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            Kompaktes Projekt (nur Code-Dateien)
+                            <span class="badge bg-success rounded-pill">2.8 MB</span>
+                        </a>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <h5>Hinweis:</h5>
+                        <p>Nach dem Download musst du folgende Schritte beachten:</p>
+                        <ol>
+                            <li>Entpacke die ZIP-Datei in einen neuen Ordner</li>
+                            <li>Stelle sicher, dass eine .env-Datei mit deinem Discord-Bot-Token vorhanden ist</li>
+                            <li>Installiere die erforderlichen Python-Pakete mit <code>pip install -r requirements.txt</code></li>
+                            <li>Starte den Bot mit <code>python main.py</code></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

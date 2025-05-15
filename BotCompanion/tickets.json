@@ -1,0 +1,15 @@
+{
+    "counter": 6,
+    "tickets": {},
+    "settings": {
+        "category_id": 1355493282796273686,
+        "log_channel_id": null,
+        "ticket_message": "Willkommen bei deinem Support-Ticket!\n\nBitte beschreibe dein Anliegen so detailliert wie m\u00f6glich, und ein Teammitglied wird sich so schnell wie m\u00f6glich bei dir melden.",
+        "support_role_ids": [
+            1355490935949230138,
+            1355264409328550053,
+            1366023307652108351,
+            1368875449459146752
+        ]
+    }
+}

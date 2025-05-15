@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block title %}MysticSMP Bot - Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card bg-primary text-white mb-3">
+                            <div class="card-body text-center">
+                                <div class="h1"><i class="fas fa-server"></i></div>
+                                <h5 class="card-title">Bot-Status</h5>
+                                <p class="card-text h3" id="bot-status">Online</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-success text-white mb-3">
+                            <div class="card-body text-center">
+                                <div class="h1"><i class="fas fa-clock"></i></div>
+                                <h5 class="card-title">Uptime</h5>
+                                <p class="card-text h3" id="bot-uptime">3d 4h 12m</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-info text-white mb-3">
+                            <div class="card-body text-center">
+                                <div class="h1"><i class="fas fa-users"></i></div>
+                                <h5 class="card-title">Server</h5>
+                                <p class="card-text h3" id="bot-guilds">1</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-warning text-white mb-3">
+                            <div class="card-body text-center">
+                                <div class="h1"><i class="fas fa-terminal"></i></div>
+                                <h5 class="card-title">Befehle</h5>
+                                <p class="card-text h3" id="bot-commands">80</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-cogs me-2"></i> Bot-Module
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-coins me-2 text-warning"></i>
+                                    Economy System
+                                </h5>
+                                <p class="card-text">Konfiguriere das Economy-System mit individuellen Einstellungen für jeden Befehl.</p>
+                                <a href="{{ url_for('economy') }}" class="btn btn-primary">Einstellungen</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-chart-line me-2 text-success"></i>
+                                    Level System
+                                </h5>
+                                <p class="card-text">Passe die XP-Raten, Level-Anforderungen und Rollen-Belohnungen an.</p>
+                                <a href="{{ url_for('levels') }}" class="btn btn-primary">Einstellungen</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-ticket-alt me-2 text-danger"></i>
+                                    Ticket System
+                                </h5>
+                                <p class="card-text">Konfiguriere das Ticket-System mit benutzerdefinierten Kategorien und Rollen.</p>
+                                <a href="{{ url_for('tickets') }}" class="btn btn-primary">Einstellungen</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-microphone-alt me-2 text-info"></i>
+                                    Temp Voice
+                                </h5>
+                                <p class="card-text">Erstelle temporäre Sprachkanäle mit anpassbaren Namen und Einstellungen.</p>
+                                <a href="{{ url_for('temp_voice') }}" class="btn btn-primary">Einstellungen</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-gavel me-2 text-secondary"></i>
+                                    Moderation
+                                </h5>
+                                <p class="card-text">Konfiguriere Moderationsbefehle und automatische Bestrafungen.</p>
+                                <a href="{{ url_for('moderation') }}" class="btn btn-primary">Einstellungen</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-users me-2 text-primary"></i>
+                                    Self-Roles
+                                </h5>
+                                <p class="card-text">Erstelle und verwalte Rollen-Panels für deine Server-Mitglieder.</p>
+                                <a href="{{ url_for('self_roles') }}" class="btn btn-primary">Einstellungen</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // API-Abfrage für Bot-Status
+    fetch('/api/bot_status')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('bot-status').innerText = data.status;
+            document.getElementById('bot-uptime').innerText = data.uptime;
+            document.getElementById('bot-guilds').innerText = data.guilds;
+            document.getElementById('bot-commands').innerText = data.commands;
+        })
+        .catch(error => console.error('Error fetching bot status:', error));
+</script>
+{% endblock %}

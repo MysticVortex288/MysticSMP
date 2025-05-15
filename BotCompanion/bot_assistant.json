@@ -1,0 +1,145 @@
+{
+    "faqs": [
+        {
+            "question": "Was kann dieser Bot alles?",
+            "answer": "Dieser Bot bietet viele Funktionen wie Invite-Tracking, Level-System, Ticket-System, Counting-Game, temporäre Sprachkanäle, Verifizierung, Content-Ankündigungen und Self-Roles.",
+            "aliases": [
+                "Was macht der Bot?",
+                "Was sind die Funktionen des Bots?",
+                "Funktionen",
+                "Features"
+            ],
+            "category": "Allgemein"
+        },
+        {
+            "question": "Wie kann ich den Bot einrichten?",
+            "answer": "Die meisten Funktionen haben eigene Setup-Befehle. Beispiele: `/setuplevel` für das Level-System, `/setupticket` für das Ticket-System, `/setupvoice` für temporäre Sprachkanäle, usw.",
+            "aliases": [
+                "Einrichtung",
+                "Setup",
+                "Wie starte ich?"
+            ],
+            "category": "Allgemein"
+        },
+        {
+            "question": "Welche Berechtigungen braucht der Bot?",
+            "answer": "Der Bot benötigt Administrator-Berechtigungen für die volle Funktionalität. Einige Funktionen funktionieren auch mit eingeschränkten Berechtigungen, aber für die beste Erfahrung empfehlen wir Administrator-Rechte.",
+            "aliases": [
+                "Permissions",
+                "Rechte",
+                "Berechtigungen"
+            ],
+            "category": "Allgemein"
+        },
+        {
+            "question": "Wie funktioniert das Level-System?",
+            "answer": "Benutzer erhalten XP für Nachrichten (alle 60 Sekunden). Die XP führen zu Levels, und für bestimmte Levels können Rollen vergeben werden. Befehle: `/setuplevel`, `/rank`, `/leaderboard`.",
+            "aliases": [
+                "XP",
+                "Level",
+                "Leveling",
+                "Wie bekomme ich XP?"
+            ],
+            "category": "Level-System"
+        },
+        {
+            "question": "Wie funktioniert das Ticket-System?",
+            "answer": "Mit `/setupticket` richtest du das Ticket-System ein. Mit `/ticketpanel` erstellst du ein Panel, über das Benutzer Tickets erstellen können. Support-Rollen haben Zugriff auf Tickets und können sie schließen.",
+            "aliases": [
+                "Tickets",
+                "Support-Tickets",
+                "Wie erstelle ich ein Ticket?"
+            ],
+            "category": "Ticket-System"
+        },
+        {
+            "question": "Wie funktionieren Self-Roles?",
+            "answer": "Mit `/createroles` kannst du ein Self-Roles Panel erstellen. Benutzer können Rollen durch Klicken auf die Buttons erhalten. Mit `/editroles` kannst du bestehende Panels bearbeiten. Rollen können in Kategorien organisiert werden.",
+            "aliases": [
+                "Rollen",
+                "Self-Rollen",
+                "Wie bekomme ich Rollen?"
+            ],
+            "category": "Self-Roles"
+        },
+        {
+            "question": "Wie funktionieren temporäre Sprachkanäle?",
+            "answer": "Mit `/setupvoice` richtest du temporäre Sprachkanäle ein. Wenn Benutzer dem 'Erstelle einen Sprachkanal' beitreten, wird ein eigener Kanal erstellt, den sie kontrollieren können. Der Kanal wird gelöscht, wenn er leer ist.",
+            "aliases": [
+                "Voice",
+                "Sprachkanäle",
+                "Temp-VC",
+                "Wie erstelle ich einen Sprachkanal?"
+            ],
+            "category": "Temp-Voice"
+        },
+        {
+            "question": "Wie funktioniert das Counting-Game?",
+            "answer": "Mit `/countingsetup` richtest du das Counting-Game in einem Kanal ein. Benutzer müssen der Reihe nach zählen. Regeln: 1) Beginne mit 1, 2) Die nächste Zahl muss die vorherige + 1 sein, 3) Ein Benutzer darf nicht zweimal hintereinander zählen.",
+            "aliases": [
+                "Counting",
+                "Zählen",
+                "Wie spiele ich das Zählspiel?"
+            ],
+            "category": "Counting-Game"
+        },
+        {
+            "question": "Wie funktioniert die Verifizierung?",
+            "answer": "Mit `/setupverify` richtest du das Verifizierungssystem ein. Es wird eine Nachricht mit einem Button gesendet. Wenn Benutzer auf den Button klicken, erhalten sie die Member-Rolle.",
+            "aliases": [
+                "Verify",
+                "Verifizierung",
+                "Wie verifiziere ich mich?"
+            ],
+            "category": "Verifizierung"
+        },
+        {
+            "question": "Wie funktionieren Content-Ankündigungen?",
+            "answer": "Der Bot erkennt automatisch YouTube/Twitch/TikTok-Links und sendet eine Ankündigung. Mit `/setannouncementchannel` legst du den Kanal fest. Mit `/addtiktokcreator` kannst du TikTok-Creator tracken.",
+            "aliases": [
+                "Content",
+                "Ankündigungen",
+                "YouTube",
+                "Twitch",
+                "TikTok"
+            ],
+            "category": "Content-Announcer"
+        },
+        {
+            "question": "Wie funktioniert das Invite-Tracking?",
+            "answer": "Der Bot verfolgt, wer wen eingeladen hat. Mit `/invites` siehst du die Einladungen eines Benutzers. Mit `/invite-leaderboard` wird eine Rangliste angezeigt. Diese Infos werden auch in Willkommensnachrichten verwendet.",
+            "aliases": [
+                "Invites",
+                "Einladungen",
+                "Wer hat wen eingeladen?"
+            ],
+            "category": "Invite-Tracking"
+        },
+        {
+            "question": "Wie passe ich Willkommensnachrichten an?",
+            "answer": "Mit `/welcome channel` legst du den Kanal fest. Mit `/welcome message` kannst du die Nachricht anpassen. `/welcome variables` zeigt verfügbare Variablen an. `/welcome toggle` aktiviert/deaktiviert die Nachrichten.",
+            "aliases": [
+                "Welcome",
+                "Willkommen",
+                "Begrüßung",
+                "Wie begrüße ich neue Mitglieder?"
+            ],
+            "category": "Willkommensnachrichten"
+        },
+        {
+            "question": "Wie bekomme ich Hilfe bei einer bestimmten Funktion?",
+            "answer": "Du kannst `/help` verwenden, um allgemeine Hilfe zu erhalten. Mit `/help [Kategorie]` bekommst du spezifische Hilfe zu Funktionen wie 'level', 'ticket', 'roles', usw.",
+            "aliases": [
+                "Hilfe",
+                "Befehle",
+                "Wie benutze ich eine Funktion?"
+            ],
+            "category": "Allgemein"
+        }
+    ],
+    "assistant_channels": {
+        "1355262405726175354": [
+            1356968090914656538
+        ]
+    }
+}

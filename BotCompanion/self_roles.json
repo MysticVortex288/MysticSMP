@@ -1,0 +1,265 @@
+{
+    "1355262405726175354": {
+        "panels": [
+            {
+                "panel_id": "1355262405726175354_0",
+                "title": "Self roles",
+                "description": "Hol dir die",
+                "roles": [
+                    {
+                        "role_id": 1368295001842389128,
+                        "style": "primary",
+                        "emoji": "\ud83d\ude05",
+                        "label": "Epvp"
+                    }
+                ],
+                "channel_id": 1355533979515617370,
+                "message_id": 1368295155681071295
+            },
+            {
+                "panel_id": "1355262405726175354_1",
+                "title": "Self roles",
+                "description": "Hol sie dir",
+                "roles": [
+                    {
+                        "role_id": 1368295001842389128,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "Epvp",
+                        "category_id": "cat_0"
+                    },
+                    {
+                        "role_id": 1368301421753012248,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "Cb",
+                        "category_id": "cat_0"
+                    },
+                    {
+                        "role_id": 1368301439947898900,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "Skypvp",
+                        "category_id": "cat_0"
+                    },
+                    {
+                        "role_id": 1368301449230155785,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "Lifesteal",
+                        "category_id": "cat_0"
+                    },
+                    {
+                        "role_id": 1355602729233289286,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "12+",
+                        "category_id": "cat_1"
+                    },
+                    {
+                        "role_id": 1355602730101506162,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "16+",
+                        "category_id": "cat_1"
+                    },
+                    {
+                        "role_id": 1368301529169395795,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "18",
+                        "category_id": "cat_1"
+                    },
+                    {
+                        "role_id": 1368301670651531317,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "Valorant",
+                        "category_id": "cat_2"
+                    },
+                    {
+                        "role_id": 1368301682135535646,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "Roblox",
+                        "category_id": "cat_2"
+                    },
+                    {
+                        "role_id": 1368301698442858536,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "Minecraft",
+                        "category_id": "cat_2"
+                    },
+                    {
+                        "role_id": 1368301717472415746,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "Fortnite",
+                        "category_id": "cat_2"
+                    },
+                    {
+                        "role_id": 1368301788519727256,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "News",
+                        "category_id": "cat_3"
+                    },
+                    {
+                        "role_id": 1368301855276536044,
+                        "style": "primary",
+                        "emoji": null,
+                        "label": "Content",
+                        "category_id": "cat_3"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": "cat_0",
+                        "name": "Twerion"
+                    },
+                    {
+                        "id": "cat_1",
+                        "name": "Alter"
+                    },
+                    {
+                        "id": "cat_2",
+                        "name": "Spiele"
+                    },
+                    {
+                        "id": "cat_3",
+                        "name": "Geschlecht"
+                    },
+                    {
+                        "id": "cat_4",
+                        "name": "Pings"
+                    }
+                ],
+                "channel_id": 1355533979515617370,
+                "message_id": 1368301930979262555
+            },
+            {
+                "panel_id": "1355262405726175354_2",
+                "title": "Self-Roles",
+                "description": "Hol dir deine passenden Rollen",
+                "roles": [
+                    {
+                        "role_id": 1370647985373057084,
+                        "style": "primary",
+                        "emoji": "\ud83c\udf81",
+                        "label": "GiveawayPing",
+                        "category_id": "cat_0"
+                    },
+                    {
+                        "role_id": 1370648147138711712,
+                        "style": "primary",
+                        "emoji": "\ud83c\udd99",
+                        "label": "Updates",
+                        "category_id": "cat_0"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": "cat_0",
+                        "name": "Pings"
+                    }
+                ],
+                "channel_id": 1370646626166771732,
+                "message_id": 1370648189077688392
+            },
+            {
+                "panel_id": "1355262405726175354_3",
+                "title": "Self-Roles",
+                "description": "Hol dir deine passenden Rollen",
+                "roles": [
+                    {
+                        "role_id": 1370649610632298516,
+                        "style": "primary",
+                        "emoji": "\ud83c\udf89",
+                        "label": "Giveaway",
+                        "category_id": "cat_0"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": "cat_0",
+                        "name": "Pings"
+                    }
+                ],
+                "channel_id": 1370649332931497984,
+                "message_id": 1370649632815972473
+            },
+            {
+                "panel_id": "1355262405726175354_4",
+                "title": "Farbrollen",
+                "description": "W\u00e4hle deine Lieblingsfarbe f\u00fcr deinen Namen! Du kannst nur eine Farbe gleichzeitig haben.",
+                "roles": [
+                    {
+                        "role_id": 1370649799300481065,
+                        "style": "danger",
+                        "emoji": "\ud83d\udd34",
+                        "label": "Rot"
+                    },
+                    {
+                        "role_id": 1370649801733181470,
+                        "style": "primary",
+                        "emoji": "\ud83d\udd35",
+                        "label": "Blau"
+                    },
+                    {
+                        "role_id": 1370649803515629670,
+                        "style": "success",
+                        "emoji": "\ud83d\udfe2",
+                        "label": "Gr\u00fcn"
+                    },
+                    {
+                        "role_id": 1370649805289689111,
+                        "style": "primary",
+                        "emoji": "\ud83d\udfe1",
+                        "label": "Gelb"
+                    },
+                    {
+                        "role_id": 1370649806954823741,
+                        "style": "danger",
+                        "emoji": "\ud83d\udfe0",
+                        "label": "Orange"
+                    },
+                    {
+                        "role_id": 1370649808783540335,
+                        "style": "primary",
+                        "emoji": "\ud83d\udfe3",
+                        "label": "Lila"
+                    },
+                    {
+                        "role_id": 1370649829008474195,
+                        "style": "danger",
+                        "emoji": "\ud83d\udc97",
+                        "label": "Pink"
+                    },
+                    {
+                        "role_id": 1370649831038779463,
+                        "style": "primary",
+                        "emoji": "\ud83d\udc99",
+                        "label": "T\u00fcrkis"
+                    },
+                    {
+                        "role_id": 1370649832645070851,
+                        "style": "secondary",
+                        "emoji": "\u26aa",
+                        "label": "Wei\u00df"
+                    },
+                    {
+                        "role_id": 1370649834964516935,
+                        "style": "secondary",
+                        "emoji": "\u26ab",
+                        "label": "Schwarz"
+                    }
+                ],
+                "is_exclusive": true,
+                "categories": [],
+                "channel_id": 1355602407563722883,
+                "message_id": 1370649892913156149
+            }
+        ]
+    }
+}

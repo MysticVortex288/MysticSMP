@@ -1,0 +1,32 @@
+{
+    "users": {
+        "1338909801865810041": {
+            "level": 2,
+            "xp": 344
+        },
+        "1269233770834165860": {
+            "level": 1,
+            "xp": 99
+        },
+        "1084884132510842960": {
+            "level": 0,
+            "xp": 56
+        }
+    },
+    "roles": {
+        "1": "ChatRevive",
+        "5": "Rookie",
+        "10": "Amateur",
+        "15": "Regular",
+        "25": "Veteran",
+        "40": "Master",
+        "60": "Legend"
+    },
+    "xp_per_message": {
+        "min": 15,
+        "max": 25
+    },
+    "last_leaderboard_update": 1747232496,
+    "leaderboard_channel": 1355602407563722883,
+    "leaderboard_message": 1367954473854435484
+}
